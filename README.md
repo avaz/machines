@@ -6,13 +6,13 @@ and use everyday. Essentially they are my `dotfiles` with steroids.
 ## Machines
 
 - main-machine: my everyday use machine
-- serveer-machine: an old MacBook that servers as mini-k8s server for testing and learning purposes
+- server-machine: an old MacBook that servers as mini-k8s server for testing and learning purposes
 
 ## How to use
 
 To configure and reconfgure any machine run:
 
-````shell
+```shell
 nix run nix-darwin -- switch --flake ~/.config/machines#main-machine
 ```
 
@@ -29,7 +29,7 @@ nix flake init -t  ~/.config/machines#node-dev
 
 Also is provide some shells. To make use run:
 
-````shell
+```shell
 nix develop ~/.config/machines#node -c $SHELL
 ```
 
