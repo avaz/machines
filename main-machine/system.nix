@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   nix.enable = false;
@@ -16,6 +16,7 @@
   ];
 
   system = {
+    primaryUser = "${username}";
     stateVersion = 4;
     defaults = {
         dock = {
@@ -28,6 +29,10 @@
         trackpad = {
             Clicking = true;
             TrackpadThreeFingerDrag = true;
+        };
+        universalaccess = {
+            reduceMotion = true;
+            reduceTransparency = true;
         };
     };
     keyboard = {
