@@ -18,11 +18,11 @@ nix run nix-darwin -- switch --flake ~/.config/machines#main-machine
 
 ### Templates
 
-This configuration brings a few shell templates to allow for custom and clean development. 
+This configuration brings a few shell templates to allow for custom and clean development.
 To start a shell using one of the provided templates, run:
 
 ```shell
-nix flake init -t  ~/.config/machines#node-dev
+nix flake init -t  ~/.config/machines#python
 ```
 
 ### Shells
@@ -32,5 +32,3 @@ Also is providing some shells. To make use run:
 ```shell
 nix develop ~/.config/machines#node -c $SHELL
 ```
-
-

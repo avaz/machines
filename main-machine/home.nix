@@ -7,25 +7,24 @@
     isHidden = false;
     shell = pkgs.zsh;
   };
+
   home-manager = {
     useGlobalPkgs = true;
-    users.${username}= { pkgs, config, lib, ... }:{
-       home = {
-          packages = with pkgs; [
-            htop
-            git-town
-            gh
-            direnv
-            tor
-            docker-credential-helpers
-          ];
-          sessionVariables = {
-            NIX_SHELL_PYTHON = "nix develop github:avaz/machines#python";
-            NIX_SHELL_JAVA = "nix develop github:avaz/machines#java";
-          };
-          stateVersion = "23.11";
-      };
+    users.${username} = { pkgs, config, lib, ... }: {
+        imports = [
+            ./zsh.nix
+        ];
+        home = {
+            stateVersion = "23.11";
+            packages = with pkgs; [
+                htop
+                git-town
+                gh
+                tor
+                direnv
+                docker-credential-helpers
+            ];
+        };
     };
   };
-
 }

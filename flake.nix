@@ -47,14 +47,19 @@
     );
 
     templates = {
-      python-dev = {
+      python = {
         path = ./templates/python;
-        description = "Python development environment template";
+        description = "Python development environment";
       };
 
-      java-dev = {
+      java = {
         path = ./templates/java;
-        description = "Java development environment template";
+        description = "Java development environment";
+      };
+
+      node = {
+        path = ./templates/node;
+        description = "NodeJS development environment";
       };
     };
   };
