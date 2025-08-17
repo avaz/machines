@@ -23,6 +23,7 @@
                 tor
                 direnv
                 docker-credential-helpers
+                aws-vault
             ];
         };
     };

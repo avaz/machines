@@ -25,6 +25,7 @@ in
         "direnv"
         "gh"
         "history-substring-search"
+        "gradle"
       ];
       theme = "typewritten";
       custom = "$HOME/.config/.oh-my-zsh-custom";
