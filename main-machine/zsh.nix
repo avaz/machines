@@ -40,8 +40,8 @@ in
       shp = "nix develop github:avaz/machines#python -c $SHELL";
       shn = "nix develop github:avaz/machines#node -c $SHELL";
       pjv = "nix flake init -t github:avaz/machines#java";
-      ppt = "nix flake init -t github:avaz/machines#python";
-      pno = "nix flake init -t github:avaz/machines#node";
+      pjp = "nix flake init -t github:avaz/machines#python";
+      pjn = "nix flake init -t github:avaz/machines#node";
     };
 
     # Custom shell initialization
