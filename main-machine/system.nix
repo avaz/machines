@@ -1,7 +1,6 @@
 { config, pkgs, username, ... }:
 
 {
-  nix.enable = false;
   nix.package = pkgs.nix;
 
   programs.zsh.enable = true;
@@ -16,8 +15,6 @@
   ];
 
   system = {
-    primaryUser = "${username}";
-    stateVersion = 4;
     defaults = {
         dock = {
             autohide = true;

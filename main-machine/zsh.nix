@@ -26,20 +26,23 @@ in
         "gh"
         "history-substring-search"
         "gradle"
+        "kubectl"
       ];
       theme = "typewritten";
       custom = "$HOME/.config/.oh-my-zsh-custom";
     };
 
     shellAliases = {
-      ll = "ls -l";
-      l = "ls -la";
       q = "exit";
-      k = "kubectl";
+#      apply = "sudo nix run nix-darwin -- switch --flake ~/.config/machines";
+      apply = "sudo darwin-rebuild switch --flake ~/.config/machines";
+      gsy = "git sync";
+      prefetch = "nix flake prefetch $1";
+      prefetch-url = "nix flake prefetch-url $1";
       shj = "nix develop github:avaz/machines#java -c $SHELL";
       shp = "nix develop github:avaz/machines#python -c $SHELL";
       shn = "nix develop github:avaz/machines#node -c $SHELL";
-      pjv = "nix flake init -t github:avaz/machines#java";
+      pjj = "nix flake init -t github:avaz/machines#java";
       pjp = "nix flake init -t github:avaz/machines#python";
       pjn = "nix flake init -t github:avaz/machines#node";
     };

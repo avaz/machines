@@ -10,8 +10,11 @@
 
   home-manager = {
     useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit username; };
     users.${username} = { pkgs, config, lib, ... }: {
         imports = [
+            ../common/home.nix
             ./zsh.nix
         ];
         home = {
