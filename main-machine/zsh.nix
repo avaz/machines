@@ -27,6 +27,7 @@ in
         "history-substring-search"
         "gradle"
         "kubectl"
+        "common-aliases"
       ];
       theme = "typewritten";
       custom = "$HOME/.config/.oh-my-zsh-custom";
@@ -49,7 +50,9 @@ in
 
     # Custom shell initialization
     initContent = ''
-      # Add any custom zsh configuration here
+        if [[ -n "$OMZ_PROJECT_PLUGINS" ]]; then
+          plugins+=(''${=OMZ_PROJECT_PLUGINS})
+        fi
     '';
   };
 }

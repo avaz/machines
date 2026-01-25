@@ -28,8 +28,8 @@
             TrackpadThreeFingerDrag = true;
         };
         universalaccess = {
-            reduceMotion = true;
-            reduceTransparency = true;
+            reduceMotion = false;
+            reduceTransparency = false;
         };
     };
     keyboard = {
