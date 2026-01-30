@@ -22,7 +22,6 @@ in
       plugins = [
         "git"
         "docker"
-        "direnv"
         "gh"
         "history-substring-search"
         "gradle"
@@ -55,4 +54,9 @@ in
         fi
     '';
   };
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
 }
