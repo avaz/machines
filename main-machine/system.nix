@@ -14,6 +14,17 @@
     jq
   ];
 
+  security = {
+    pam = {
+        services = {
+            sudo_local = {
+                touchIdAuth = true;
+                watchIdAuth = false;
+            };
+        };
+    };
+  };
+
   system = {
     defaults = {
         dock = {
