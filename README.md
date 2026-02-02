@@ -13,7 +13,7 @@ and use every day. Essentially they are my `dotfiles` with steroids.
 To configure and reconfigure, any machine run:
 
 ```shell
-nix run nix-darwin -- switch --flake ~/.config/machines#main-machine
+apply
 ```
 
 ### Templates

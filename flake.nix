@@ -38,14 +38,14 @@
     mkDarwinConfig = machine:
       let
           overlays = import ./${machine.path}/overlays.nix;
-          pkgs = import nixpkgs {
-            system = machine.system;
-            inherit overlays;
-          };
         in
       nix-darwin.lib.darwinSystem {
       inherit (machine) system;
       modules = [
+        { 
+          nixpkgs.overlays = overlays;
+          nixpkgs.config.allowUnfree = true;
+        }
         ./common/system.nix
         ./${machine.path}/system.nix
         home-manager.darwinModules.home-manager
