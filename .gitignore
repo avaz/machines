@@ -1,1 +1,10 @@
 .idea/
+
+# sops-nix: Never commit private keys!
+keys.txt
+**/age/keys.txt
+
+# sops-nix: Never commit decrypted secrets
+*-secrets/
+.config/git-secrets/
+

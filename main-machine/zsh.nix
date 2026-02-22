@@ -36,7 +36,7 @@ in
       q = "exit";
 #      apply = "sudo nix run nix-darwin -- switch --flake ~/.config/machines";
       apply = "sudo darwin-rebuild switch --flake ~/.config/machines";
-      gsy = "git sync";
+      gtts = "git town sync";
       prefetch = "nix flake prefetch $1";
       prefetch-url = "nix flake prefetch-url $1";
       shj = "nix develop github:avaz/machines#java -c $SHELL";

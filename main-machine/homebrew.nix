@@ -12,6 +12,7 @@
       "jetbrains-toolbox"
       "google-chrome"
       "shottr"
+      "ghostty"
     ];
 
     masApps = {

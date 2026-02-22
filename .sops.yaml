@@ -1,0 +1,11 @@
+keys:
+  - &main_machine age1sq90mkgkuvux2usxjw0j65pkf57w3jh85x8fgq548rtz2pyfdd9scmwxj0
+  - &main_machine_ssh age1spnah66h76emut7xhqgwy9fxtsuxyq7pjfndxecyvdgt7jkrjdwq2fy39f
+
+creation_rules:
+  - path_regex: main-machine/secrets\.yaml$
+    key_groups:
+      - age:
+          - *main_machine
+          - *main_machine_ssh
+
