@@ -52,7 +52,7 @@
             key = "~/.ssh/id_ed25519.pub";
         };
         includes = [
-            { path = "~/.config/git/user"; }
+            { path = "~/.config/git/user-from-secrets"; }
         ];
     };
 
