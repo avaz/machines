@@ -36,6 +36,8 @@ in
       q = "exit";
 #      apply = "sudo nix run nix-darwin -- switch --flake ~/.config/machines";
       apply = "sudo darwin-rebuild switch --flake ~/.config/machines";
+      show = "nix flake show ~/.config/machines";
+      config = "idea ~/.config/machines";
       gtts = "git town sync";
       prefetch = "nix flake prefetch $1";
       prefetch-url = "nix flake prefetch-url $1";
