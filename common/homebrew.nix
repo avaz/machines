@@ -14,6 +14,7 @@
     ];
 
     brews = [
+        "mas"
     ];
 
     casks = [
