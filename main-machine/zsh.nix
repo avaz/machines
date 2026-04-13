@@ -35,7 +35,8 @@ in
     shellAliases = {
       q = "exit";
 #      apply = "sudo nix run nix-darwin -- switch --flake ~/.config/machines";
-      apply = "nix flake update --flake ~/.config/machines/ && sudo darwin-rebuild switch --flake ~/.config/machines";
+      apply = "sudo darwin-rebuild switch --flake ~/.config/machines";
+      apply-update = "nix flake update --flake ~/.config/machines && sudo darwin-rebuild switch --flake ~/.config/machines";
       show = "nix flake show ~/.config/machines";
       config = "idea ~/.config/machines";
       gtts = "git town sync";
