@@ -1,10 +1,19 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
-  typewritten-theme = fetchTarball {
-    url = "https://github.com/reobin/typewritten/archive/refs/tags/v1.5.2.tar.gz";
-    sha256 = "09y419rcylm5l6qy8pjj90zk4lx8b1vanbkdi7wcl03wngndwwv4";
+  typewritten-theme = pkgs.stdenv.mkDerivation {
+    name = "typewritten-theme";
+    src = pkgs.fetchurl {
+      url = "https://github.com/reobin/typewritten/archive/refs/tags/v1.5.2.tar.gz";
+      sha256 = "1z9629vz8h7dfxdv1p29zc2zrlamhfp7ni9izb3ymjv6kqixip03";
+    };
+    sourceRoot = ".";
+    installPhase = ''
+      mkdir -p $out
+      cp -r typewritten-*/* $out/
+    '';
   };
+  customDir = "${config.home.homeDirectory}/.config/.oh-my-zsh-custom";
 in
 {
   home = {
@@ -29,7 +38,7 @@ in
         "common-aliases"
       ];
       theme = "typewritten";
-      custom = "$HOME/.config/.oh-my-zsh-custom";
+      custom = customDir;
     };
 
     shellAliases = {
