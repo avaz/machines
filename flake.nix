@@ -27,52 +27,27 @@
       mac-x86 = "x86_64-darwin";
     };
 
-    machines = {
-      "main-machine" = { system = systems.mac-arm; path = "main-machine"; };
-      "server-machine" = { system = systems.mac-x86; path = "server-machine"; };
-    };
+    machines = [
+      "main-machine"
+      "server-machine"
+    ];
 
     username = nixpkgs.lib.defaultTo (builtins.getEnv "USER") "anderson";
 
-    mkDarwinConfig = machine:
+    mkDarwinConfig = name:
       let
-          overlays = import ./${machine.path}/overlays.nix;
-        in
+        machine = import ./${name}/default.nix {
+          inherit systems username home-manager nix-homebrew homebrew-core homebrew-cask;
+        };
+      in
       nix-darwin.lib.darwinSystem {
-      inherit (machine) system;
-      modules = [
-        {
-          nixpkgs.overlays = overlays;
-          nixpkgs.config.allowUnfree = true;
-        }
-        ./common/system.nix
-        ./${machine.path}/system.nix
-        home-manager.darwinModules.home-manager
-        ./${machine.path}/home.nix
-        ./${machine.path}/homebrew.nix
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          networking.hostName = machine.path;
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = machine.system == systems.mac-arm;  # Only enable for ARM Macs
-            user = username;  # Use the username variable
-            autoMigrate = true;  # Automatically migrate existing Homebrew installations
-            taps = {
-              "homebrew/homebrew-core" = homebrew-core;
-              "homebrew/homebrew-cask" = homebrew-cask;
-            };
-            mutableTaps = false;
-          };
-        }
-      ];
-      specialArgs = { inherit username sops-nix; };
-    };
+        inherit (machine) system;
+        modules = machine.modules;
+        specialArgs = { inherit username sops-nix; } // (machine.specialArgs or { });
+      };
   in
   {
-    darwinConfigurations = nixpkgs.lib.genAttrs (builtins.attrNames machines) (name:
-      mkDarwinConfig machines.${name}
-    );
+    darwinConfigurations = nixpkgs.lib.genAttrs machines mkDarwinConfig;
 
     devShells = nixpkgs.lib.genAttrs (builtins.attrValues systems) (system:
       let pkgs = import nixpkgs { inherit system; };
