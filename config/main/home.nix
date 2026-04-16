@@ -15,7 +15,7 @@
     users.${username} = { pkgs, config, lib, ... }: {
         imports = [
             sops-nix.homeManagerModules.sops
-            ../common/home.nix
+            ../../common/home.nix
             ./zsh.nix
             ./git.nix
             ./secrets.nix
@@ -35,3 +35,4 @@
     };
   };
 }
+

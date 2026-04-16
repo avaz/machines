@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../common/homebrew.nix
+    ../../common/homebrew.nix
   ];
 
   homebrew = {
@@ -34,3 +34,5 @@
     };
   };
 }
+
+

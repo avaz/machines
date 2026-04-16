@@ -1,6 +1,6 @@
 { systems, username, home-manager, nix-homebrew, homebrew-core, homebrew-cask, ... }:
 let
-  system = systems.mac-arm;
+  system = systems.mac-x86;
   overlays = import ./overlays.nix;
 in
 {
@@ -11,14 +11,14 @@ in
       nixpkgs.overlays = overlays;
       nixpkgs.config.allowUnfree = true;
     }
-    ../common/system.nix
+    ../../common/system.nix
     ./system.nix
     home-manager.darwinModules.home-manager
     ./home.nix
     ./homebrew.nix
     nix-homebrew.darwinModules.nix-homebrew
     {
-      networking.hostName = "main-machine";
+      networking.hostName = "server";
       nix-homebrew = {
         enable = true;
         enableRosetta = system == systems.mac-arm;
@@ -33,4 +33,6 @@ in
     }
   ];
 }
+
+
 

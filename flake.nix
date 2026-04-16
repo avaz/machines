@@ -28,15 +28,15 @@
     };
 
     machines = [
-      "main-machine"
-      "server-machine"
+      "main"
+      "server"
     ];
 
     username = nixpkgs.lib.defaultTo (builtins.getEnv "USER") "anderson";
 
     mkDarwinConfig = name:
       let
-        machine = import ./${name}/default.nix {
+        machine = import ./config/${name}/default.nix {
           inherit systems username home-manager nix-homebrew homebrew-core homebrew-cask;
         };
       in

@@ -20,7 +20,7 @@
           docker-credential-helpers
         ];
       };
-      
+
       programs.zsh = {
         enable = true;
         enableCompletion = true;

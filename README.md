@@ -5,8 +5,8 @@ and use every day. Essentially they are my `dotfiles` with steroids.
 
 ## Machines
 
-- main-machine: my everyday use machine
-- server-machine: an old MacBook that servers as a mini-k8s server for testing and learning purposes
+- main: my everyday use machine
+- server: an old MacBook that servers as a mini-k8s server for testing and learning purposes
 
 ## How to use
 
