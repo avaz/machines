@@ -7,7 +7,7 @@
   ];
 
   home.username = username;
-  home.stateVersion = "24.05";
+  home.stateVersion = lib.mkDefault "24.05";
   home.packages = with pkgs; [
     # Common packages for all machines
     tor

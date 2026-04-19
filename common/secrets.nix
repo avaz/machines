@@ -1,8 +1,14 @@
-{ config, lib, machineDir, ... }:
+{ config, lib, machineDir ? null, machineName ? null, ... }:
 
 let
-  secretsFile = builtins.toPath "${machineDir}/secrets.yaml";
-  hasSecretsFile = builtins.pathExists secretsFile;
+  resolvedMachineDir =
+    if machineDir != null then machineDir
+    else if machineName != null then builtins.toPath "${./..}/config/${machineName}"
+    else null;
+  secretsFile =
+    if resolvedMachineDir != null then builtins.toPath "${resolvedMachineDir}/secrets.yaml"
+    else null;
+  hasSecretsFile = secretsFile != null && builtins.pathExists secretsFile;
 in
 # Common sops/secrets configuration shared across all machines.
 # On first bootstrap, secrets.yaml may not exist yet; in that case we disable

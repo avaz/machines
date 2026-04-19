@@ -1,4 +1,4 @@
-{ config, pkgs, username, sops-nix, ... }:
+{ config, pkgs, username, sops-nix, machineDir ? null, machineName ? null, ... }:
 # Common nix-darwin module that:
 #   - Configures the primary user account
 #   - Wires up home-manager with sops-nix and the shared home configuration
@@ -14,7 +14,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit username; };
+    extraSpecialArgs = {
+      inherit username machineDir machineName;
+    };
     users.${username} = { ... }: {
       imports = [
         sops-nix.homeManagerModules.sops
