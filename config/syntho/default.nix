@@ -11,6 +11,7 @@ in
       networking.hostName = "syntho";
     }
     ../../common/system.nix
+    ./system.nix
     ../../common/homebrew.nix
     ../../common/homebrew-system.nix
     nix-homebrew.darwinModules.nix-homebrew
