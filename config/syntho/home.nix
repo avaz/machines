@@ -9,7 +9,6 @@
     # Create it with: cd config/syntho && sops secrets.yaml
     sops.defaultSopsFile = ./secrets.yaml;
 
-    home.stateVersion = "24.05";
   };
 }
 

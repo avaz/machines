@@ -1,4 +1,4 @@
-{ config, pkgs, username, ... }:
+{ config, lib, pkgs, username, ... }:
 
 {
   imports = [
@@ -7,7 +7,7 @@
   ];
 
   home.username = username;
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
   home.packages = with pkgs; [
     # Common packages for all machines
     tor
