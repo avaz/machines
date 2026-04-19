@@ -7,6 +7,14 @@
   system.stateVersion = 4;
   system.primaryUser = username;
 
+  # Explicitly declare universalaccess defaults to prevent nix-darwin from
+  # failing when it tries to write com.apple.universalaccess without permission.
+  # These are the macOS defaults (no accessibility features enabled).
+  system.defaults.universalaccess = {
+    reduceMotion = false;
+    reduceTransparency = false;
+  };
+
   # Add other common system settings here
   # These will be inherited by all machines unless overridden
 }
