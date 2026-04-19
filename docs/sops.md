@@ -3,25 +3,43 @@
 ### Viewing Secrets
 
 ```bash
-# View decrypted secrets
-SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops -d config/main/secrets.yaml
+# Replace <machine> with main/server/syntho
+SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops -d config/<machine>/secrets.yaml
 
 # Or set the environment variable permanently in your shell profile
 export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
-sops -d config/main/secrets.yaml
+sops -d config/<machine>/secrets.yaml
 ```
 
 ### Editing Secrets
 
 ```bash
-# Edit secrets (will open in your $EDITOR)
-SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/main/secrets.yaml
+# Edit machine secrets (will open in your $EDITOR)
+SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/<machine>/secrets.yaml
 ```
+
+### First Bootstrap on a Fresh Machine
+
+The shared config now handles missing `config/<machine>/secrets.yaml` automatically,
+so the first `darwin-rebuild` works without secrets present.
+
+```bash
+# 1) First apply (no secrets.yaml yet)
+sudo darwin-rebuild switch --flake ~/.config/machines#<machine>
+
+# 2) Create secrets file (even if sops is not yet in PATH)
+cd ~/.config/machines/config/<machine>
+nix shell nixpkgs#sops -c sops secrets.yaml
+
+# 3) Apply again so sops-nix starts extracting declared secrets
+sudo darwin-rebuild switch --flake ~/.config/machines#<machine>
+```
+
 ## Adding a New Secret
 
-1. Edit the secrets file:
+1. Edit the machine secrets file:
    ```bash
-   SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/main/secrets.yaml
+   SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/<machine>/secrets.yaml
    ```
 
 2. Add your secret in YAML format:
@@ -35,7 +53,7 @@ SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/main/secrets.yaml
      token: another-secret
    ```
 
-3. Declare the secret in `config/main/secrets.nix`:
+3. Declare the secret in `common/secrets.nix` (or a machine-specific module):
    ```nix
    secrets = {
      "myservice/api_key" = {
@@ -71,9 +89,8 @@ grep "# public key:" ~/.config/sops/age/keys.txt
 ### Build fails with sops errors
 ```bash
 # Check if secrets file is properly encrypted
-head config/main/secrets.yaml
+head config/<machine>/secrets.yaml
 
 # Re-encrypt if needed
-SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --encrypt --in-place config/main/secrets.yaml
+SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --encrypt --in-place config/<machine>/secrets.yaml
 ```
-

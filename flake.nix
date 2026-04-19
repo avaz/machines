@@ -37,6 +37,7 @@
 
     mkDarwinConfig = name:
       let
+        machineDir = ./config/${name};
         machine = import ./config/${name}/default.nix {
           inherit systems username home-manager nix-homebrew homebrew-core homebrew-cask;
         };
@@ -46,6 +47,8 @@
         modules = machine.modules;
         specialArgs = {
           inherit username sops-nix homebrew-core homebrew-cask;
+          machineName = name;
+          inherit machineDir;
         } // (machine.specialArgs or { });
       };
   in

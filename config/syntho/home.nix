@@ -5,10 +5,6 @@
 # common/darwin-home.nix → common/home.nix.
 {
   home-manager.users.${username} = { ... }: {
-    # Point sops at this machine's encrypted secrets file.
-    # Create it with: cd config/syntho && sops secrets.yaml
-    sops.defaultSopsFile = ./secrets.yaml;
-
+    # Add syntho-specific home-manager settings here.
   };
 }
-
