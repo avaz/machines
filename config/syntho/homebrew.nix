@@ -1,17 +1,15 @@
 { ... }:
 
 {
-
   homebrew = {
     # Machine-specific additions/overrides
     brews = [
-      # Server-specific packages
+      # Syntho-specific formulas
     ];
 
     casks = [
-      # Server-specific casks
+      # Syntho-specific casks
     ];
   };
 }
-
 

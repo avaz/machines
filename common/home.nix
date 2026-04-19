@@ -1,6 +1,11 @@
 { config, pkgs, username, ... }:
 
 {
+  imports = [
+    ./zsh.nix
+    ./secrets.nix
+  ];
+
   home.username = username;
   home.stateVersion = "23.11";
   home.packages = with pkgs; [
@@ -9,6 +14,9 @@
     direnv
     gh
     git-town
+    htop
+    docker-credential-helpers
+    aws-vault
   ];
 
   # Add other common programs/settings here

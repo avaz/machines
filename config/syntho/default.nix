@@ -1,4 +1,4 @@
-{ systems, username, home-manager, ... }:
+{ systems, home-manager, nix-homebrew, ... }:
 let
   system = systems.mac-arm;
 in
@@ -6,15 +6,17 @@ in
   inherit system;
 
   modules = [
-    ../../common/system.nix
     {
       nixpkgs.config.allowUnfree = true;
-    }
-    home-manager.darwinModules.home-manager
-    {
       networking.hostName = "syntho";
-      home-manager.users.${username} = import ./home.nix;
     }
+    ../../common/system.nix
+    ../../common/homebrew.nix
+    ../../common/homebrew-system.nix
+    nix-homebrew.darwinModules.nix-homebrew
+    home-manager.darwinModules.home-manager
+    ../../common/darwin-home.nix
+    ./home.nix
+    ./homebrew.nix
   ];
 }
-

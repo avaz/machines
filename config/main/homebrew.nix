@@ -1,9 +1,6 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
-  imports = [
-    ../../common/homebrew.nix
-  ];
 
   homebrew = {
     # Machine-specific additions/overrides
@@ -12,7 +9,6 @@
       "jetbrains-toolbox"
       "google-chrome"
       "shottr"
-      "ghostty"
       "basecamp"
       "keymapp"
     ];

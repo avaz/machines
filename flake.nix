@@ -30,6 +30,7 @@
     machines = [
       "main"
       "server"
+      "syntho"
     ];
 
     username = nixpkgs.lib.defaultTo (builtins.getEnv "USER") "anderson";
@@ -43,7 +44,9 @@
       nix-darwin.lib.darwinSystem {
         inherit (machine) system;
         modules = machine.modules;
-        specialArgs = { inherit username sops-nix; } // (machine.specialArgs or { });
+        specialArgs = {
+          inherit username sops-nix homebrew-core homebrew-cask;
+        } // (machine.specialArgs or { });
       };
   in
   {

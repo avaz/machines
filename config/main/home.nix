@@ -1,38 +1,19 @@
-{ config, pkgs, username, sops-nix, ... }:
+{ config, pkgs, username, ... }:
 
+# Machine-specific home-manager additions for "main".
+# The base user account, home-manager wiring, zsh, and common secrets
+# are provided by common/darwin-home.nix → common/home.nix.
 {
-  users.users.${username} = {
-    name = "${username}";
-    home = "/Users/${username}";
-    isHidden = false;
-    shell = pkgs.zsh;
-  };
+  home-manager.users.${username} = { pkgs, config, lib, ... }: {
+    imports = [
+      ./git.nix
+    ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = { inherit username; };
-    users.${username} = { pkgs, config, lib, ... }: {
-        imports = [
-            sops-nix.homeManagerModules.sops
-            ../../common/home.nix
-            ./zsh.nix
-            ./git.nix
-            ./secrets.nix
-        ];
-        home = {
-            stateVersion = "23.11";
-            packages = with pkgs; [
-                htop
-                git-town
-                gh
-                tor
-                direnv
-                docker-credential-helpers
-                aws-vault
-            ];
-        };
-    };
+    # Set the secrets file for this machine
+    sops.defaultSopsFile = ./secrets.yaml;
+
+    home.packages = with pkgs; [
+      # Machine-specific packages (on top of common ones in common/home.nix)
+    ];
   };
 }
-

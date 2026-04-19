@@ -1,4 +1,4 @@
-{ systems, username, home-manager, nix-homebrew, homebrew-core, homebrew-cask, ... }:
+{ systems, home-manager, nix-homebrew, ... }:
 let
   system = systems.mac-arm;
   overlays = import ./overlays.nix;
@@ -8,30 +8,18 @@ in
 
   modules = [
     {
+      networking.hostName = "main";
       nixpkgs.overlays = overlays;
       nixpkgs.config.allowUnfree = true;
     }
     ../../common/system.nix
+    ../../common/darwin-home.nix
+    ../../common/homebrew.nix
+    ../../common/homebrew-system.nix
     ./system.nix
     home-manager.darwinModules.home-manager
     ./home.nix
     ./homebrew.nix
     nix-homebrew.darwinModules.nix-homebrew
-    {
-      networking.hostName = "main";
-      nix-homebrew = {
-        enable = true;
-        enableRosetta = system == systems.mac-arm;
-        user = username;
-        autoMigrate = true;
-        taps = {
-          "homebrew/homebrew-core" = homebrew-core;
-          "homebrew/homebrew-cask" = homebrew-cask;
-        };
-        mutableTaps = false;
-      };
-    }
   ];
 }
-
-
