@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    basecamp-cli.url = "github:basecamp/basecamp-cli/v0.7.2";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -20,7 +21,7 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, nix-homebrew, homebrew-core, homebrew-cask, sops-nix, ... }:
+  outputs = { self, nixpkgs, basecamp-cli, nix-darwin, home-manager, nix-homebrew, homebrew-core, homebrew-cask, sops-nix, ... }:
   let
     systems = {
       mac-arm = "aarch64-darwin";
@@ -49,6 +50,7 @@
           inherit username sops-nix homebrew-core homebrew-cask;
           machineName = name;
           inherit machineDir;
+          basecampCliPkg = basecamp-cli.packages.${machine.system}.default;
         } // (machine.specialArgs or { });
       };
   in

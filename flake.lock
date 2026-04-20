@@ -1,5 +1,24 @@
 {
   "nodes": {
+    "basecamp-cli": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1774505501,
+        "narHash": "sha256-7UiRrDptj7yuEFwToOfdunUMz/i3jRLR7CmMoYQjq6k=",
+        "owner": "basecamp",
+        "repo": "basecamp-cli",
+        "rev": "f087e6ef84002503d0dbc75ea1c8c928a8928d9e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "basecamp",
+        "ref": "v0.7.2",
+        "repo": "basecamp-cli",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -109,6 +128,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1772643971,
+        "narHash": "sha256-+bllfMsclzbAAPMZTm3K9G/a5lG+s6l18/AyyYLPSIE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "400de68cd101e8cfebffea121397683caf7f5a34",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1776169885,
         "narHash": "sha256-l/iNYDZ4bGOAFQY2q8y5OAfBBtrDAaPuRQqWaFHVRXM=",
         "owner": "NixOS",
@@ -125,12 +160,13 @@
     },
     "root": {
       "inputs": {
+        "basecamp-cli": "basecamp-cli",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "sops-nix": "sops-nix"
       }
     },

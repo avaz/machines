@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, username, basecampCliPkg ? null, ... }:
 
 let
   terminalTheme = ./.terminal.terminal;
@@ -12,7 +12,7 @@ in
 
   home.username = username;
   home.stateVersion = lib.mkDefault "24.05";
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     # Common packages for all machines
     git
     vim
@@ -28,6 +28,9 @@ in
     sops
     age
     ssh-to-age
+    github-copilot-cli
+  ]) ++ lib.optionals (basecampCliPkg != null) [
+    basecampCliPkg
   ];
 
   # Import and set the macOS Terminal theme on activation.

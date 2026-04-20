@@ -1,4 +1,4 @@
-{ config, pkgs, username, sops-nix, machineDir ? null, machineName ? null, ... }:
+{ config, pkgs, username, sops-nix, machineDir ? null, machineName ? null, basecampCliPkg ? null, ... }:
 # Common nix-darwin module that:
 #   - Configures the primary user account
 #   - Wires up home-manager with sops-nix and the shared home configuration
@@ -15,7 +15,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit username machineDir machineName;
+      inherit username machineDir machineName basecampCliPkg;
     };
     users.${username} = { ... }: {
       imports = [
