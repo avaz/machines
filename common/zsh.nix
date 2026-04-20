@@ -72,6 +72,7 @@ in
   };
   programs.zsh.sessionVariables = {
     EDITOR = "idea -w";
+    DIRENV_LOG_FORMAT="direnv: %s";
   };
 }
 
