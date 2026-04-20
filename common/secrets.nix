@@ -14,6 +14,9 @@ in
 # On first bootstrap, secrets.yaml may not exist yet; in that case we disable
 # secret extraction so darwin-rebuild can run and install sops tooling.
 {
+  warnings = lib.optional (!hasSecretsFile && machineName != null)
+    "sops: ${machineName} secrets.yaml not found in flake source (${toString secretsFile}). If the file exists locally, run: git add config/${machineName}/secrets.yaml";
+
   sops = {
     # Age key file location (consistent across machines)
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";

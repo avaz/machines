@@ -5,6 +5,15 @@
     ...
 }:
 {
+    sops.templates."git-user-from-secrets" = {
+        path = "${config.home.homeDirectory}/.config/git/user-from-secrets";
+        content = ''
+            [user]
+                name = ${config.sops.placeholder."git/user/name"}
+                email = ${config.sops.placeholder."git/user/email"}
+        '';
+    };
+
     programs.git = {
         enable = true;
         settings = {
@@ -52,7 +61,7 @@
             key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
         };
         includes = [
-            { path = "${config.home.homeDirectory}/.config/git/user-from-secrets"; }
+            { path = config.sops.templates."git-user-from-secrets".path; }
         ];
     };
 
@@ -103,20 +112,5 @@
         fi
     '';
 
-    # Create git user config from secrets
-    home.activation.setupGitUser = lib.hm.dag.entryAfter ["writeBoundary"] ''
-        secretsConfig="${config.home.homeDirectory}/.config/git/user-from-secrets"
-        nameSecret="${config.home.homeDirectory}/.config/git-secrets/name"
-        emailSecret="${config.home.homeDirectory}/.config/git-secrets/email"
-
-        if [ -f "$nameSecret" ] && [ -f "$emailSecret" ]; then
-            $DRY_RUN_CMD ${pkgs.coreutils}/bin/mkdir -p "${config.home.homeDirectory}/.config/git"
-            userName="$(${pkgs.coreutils}/bin/cat "$nameSecret")"
-            userEmail="$(${pkgs.coreutils}/bin/cat "$emailSecret")"
-            $DRY_RUN_CMD ${pkgs.coreutils}/bin/printf "[user]\n" > "$secretsConfig"
-            $DRY_RUN_CMD ${pkgs.coreutils}/bin/printf "    name = %s\n" "$userName" >> "$secretsConfig"
-            $DRY_RUN_CMD ${pkgs.coreutils}/bin/printf "    email = %s\n" "$userEmail" >> "$secretsConfig"
-        fi
-    '';
 }
 

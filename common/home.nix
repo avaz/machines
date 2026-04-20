@@ -14,13 +14,20 @@ in
   home.stateVersion = lib.mkDefault "24.05";
   home.packages = with pkgs; [
     # Common packages for all machines
+    git
+    vim
+    httpie
+    curl
+    jq
     tor
     direnv
     gh
     git-town
     htop
     docker-credential-helpers
-    aws-vault
+    sops
+    age
+    ssh-to-age
   ];
 
   # Import and set the macOS Terminal theme on activation.
@@ -32,17 +39,22 @@ in
     THEME_NAME="${themeName}"
     PREF_DOMAIN="com.apple.Terminal"
 
-    # Only import if the profile isn't already registered
-    if ! /usr/libexec/PlistBuddy -c "Print :'Window Settings':'$THEME_NAME'" \
-        ~/Library/Preferences/$PREF_DOMAIN.plist &>/dev/null; then
+    # Check if the theme is already set as the default
+    CURRENT_SETTING=$(/usr/bin/defaults read "$PREF_DOMAIN" "Default Window Settings" 2>/dev/null)
+
+    if [ "$CURRENT_SETTING" != "$THEME_NAME" ]; then
+      echo "Setting up Terminal theme '$THEME_NAME'..."
       /usr/bin/open "$THEME_SRC"
       # Give Terminal a moment to register the new profile
       /bin/sleep 1
-    fi
 
-    # Set as default and startup window profile
-    /usr/bin/defaults write "$PREF_DOMAIN" "Default Window Settings" -string "$THEME_NAME"
-    /usr/bin/defaults write "$PREF_DOMAIN" "Startup Window Settings" -string "$THEME_NAME"
+      # Set as default and startup window profile
+      /usr/bin/defaults write "$PREF_DOMAIN" "Default Window Settings" -string "$THEME_NAME"
+      /usr/bin/defaults write "$PREF_DOMAIN" "Startup Window Settings" -string "$THEME_NAME"
+      echo "Theme registered and set as default"
+    else
+      echo "Terminal theme already configured, skipping..."
+    fi
   '';
 
   # Add other common programs/settings here

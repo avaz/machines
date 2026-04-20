@@ -1,19 +1,6 @@
 { config, pkgs, username, ... }:
 
 {
-  nix.package = pkgs.nix;
-
-  programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh ];
-
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    httpie
-    curl
-    jq
-  ];
-
   security = {
     pam = {
         services = {

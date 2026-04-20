@@ -70,5 +70,8 @@ in
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
+  programs.zsh.sessionVariables = {
+    EDITOR = "idea -w";
+  };
 }
 

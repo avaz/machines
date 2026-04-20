@@ -15,7 +15,12 @@ sops -d config/<machine>/secrets.yaml
 
 ```bash
 # Edit machine secrets (will open in your $EDITOR)
+# NOTE: must be run from ~/.config/machines (sops looks for .sops.yaml by traversing up from cwd)
+cd ~/.config/machines
 SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops config/<machine>/secrets.yaml
+
+# Alternatively, run from anywhere by passing --config explicitly:
+SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --config ~/.config/machines/.sops.yaml ~/.config/machines/config/<machine>/secrets.yaml
 ```
 
 ### First Bootstrap on a Fresh Machine
@@ -27,9 +32,9 @@ so the first `darwin-rebuild` works without secrets present.
 # 1) First apply (no secrets.yaml yet)
 sudo darwin-rebuild switch --flake ~/.config/machines#<machine>
 
-# 2) Create secrets file (even if sops is not yet in PATH)
-cd ~/.config/machines/config/<machine>
-nix shell nixpkgs#sops -c sops secrets.yaml
+   # 2) Create secrets file (must run from ~/.config/machines so sops finds .sops.yaml)
+   cd ~/.config/machines
+   nix shell nixpkgs#sops -c sops config/<machine>/secrets.yaml
 
 # 3) Apply again so sops-nix starts extracting declared secrets
 sudo darwin-rebuild switch --flake ~/.config/machines#<machine>
