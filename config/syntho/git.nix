@@ -17,6 +17,25 @@
     programs.git = {
         enable = true;
         settings = {
+            alias = {
+                append = "town append";
+                compress = "town compress";
+                continue = "town continue";
+                contribute = "town contribute";
+                delete = "town delete";
+                "diff-parent" = "town diff-parent";
+                down = "town down";
+                hack = "town hack";
+                observe = "town observe";
+                park = "town park";
+                prepend = "town prepend";
+                propose = "town propose";
+                rename = "town rename";
+                repo = "town repo";
+                "set-parent" = "town set-parent";
+                 sync = "town sync";
+                 up = "town up";
+            };
             core = {
                 autocrlf = "input";
             };
