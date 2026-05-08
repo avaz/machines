@@ -11,6 +11,7 @@
       "jetbrains-toolbox"
       "google-chrome"
       "shottr"
+      "cleanshot"
     ];
   };
 }
