@@ -8,6 +8,7 @@ in
   imports = [
     ./zsh.nix
     ./secrets.nix
+    ./git.nix
   ];
 
   home.username = username;
