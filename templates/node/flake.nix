@@ -16,7 +16,7 @@
     {
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
-          packages = with pkgs; [ node2nix nodejs bun ];
+          packages = with pkgs; [ nodejs bun ];
         };
       });
     };
