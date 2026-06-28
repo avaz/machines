@@ -4,12 +4,16 @@
 
   homebrew = {
     # Machine-specific additions/overrides
+    brews = [
+      "llmfit"
+    ];
+
     casks = [
       "docker-desktop"
       "jetbrains-toolbox"
       "google-chrome"
       "shottr"
-      "basecamp"
+#      "basecamp"
       "keymapp"
     ];
 

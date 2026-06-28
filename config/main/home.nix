@@ -6,6 +6,8 @@
   home-manager.users.${username} = { pkgs, ... }: {
     home.packages = with pkgs; [
       # Machine-specific packages (on top of common ones in common/home.nix)
+      awscli2
+      aws-vault
     ];
   };
 }
