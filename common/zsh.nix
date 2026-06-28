@@ -20,6 +20,9 @@ in
     file.".config/.oh-my-zsh-custom/themes/typewritten.zsh-theme".source = "${typewritten-theme}/typewritten.zsh-theme";
     file.".config/.oh-my-zsh-custom/themes/async.zsh".source = "${typewritten-theme}/async.zsh";
     file.".config/.oh-my-zsh-custom/themes/lib".source = "${typewritten-theme}/lib";
+    sessionPath = [
+      "/Users/anderson/Library/Application Support/JetBrains/Toolbox/scripts"
+    ];
   };
   programs.zsh = {
     enable = true;
