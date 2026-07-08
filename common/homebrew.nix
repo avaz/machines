@@ -20,6 +20,7 @@
 
     # Keep common casks conservative; machine modules can append more.
     casks = [
+      "granola"
     ];
 
     masApps = {
