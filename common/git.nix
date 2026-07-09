@@ -130,6 +130,8 @@
 
     if [ -f "$nameSecret" ] && [ -f "$emailSecret" ]; then
       $DRY_RUN_CMD ${pkgs.coreutils}/bin/mkdir -p "${config.home.homeDirectory}/.config/git"
+      # Remove stale symlink or old file before writing (e.g. leftover from a previous sops template).
+      [ -L "$secretsConfig" ] && $DRY_RUN_CMD ${pkgs.coreutils}/bin/rm -f "$secretsConfig"
       userName="$(${pkgs.coreutils}/bin/cat "$nameSecret")"
       userEmail="$(${pkgs.coreutils}/bin/cat "$emailSecret")"
       $DRY_RUN_CMD ${pkgs.coreutils}/bin/printf "[user]\n" > "$secretsConfig"

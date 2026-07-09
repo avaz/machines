@@ -61,6 +61,10 @@ in
     fi
   '';
 
+  home.sessionPath = [
+    "${config.home.homeDirectory}/Library/Application Support/JetBrains/Toolbox/scripts"
+  ];
+
   # Add other common programs/settings here
   # These will be inherited by all machines unless overridden
 }
