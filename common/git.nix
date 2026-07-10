@@ -29,6 +29,7 @@
       };
       core = {
         autocrlf = "input";
+        excludesFile = "${config.home.homeDirectory}/.gitignore_global";
       };
       credential = {
         helper = "osxkeychain";
@@ -74,6 +75,8 @@
       { path = "${config.home.homeDirectory}/.config/git/user-from-secrets"; }
     ];
   };
+
+  home.file.".gitignore_global".source = ./.gitignore_global;
 
   # Generate SSH signing key if it doesn't exist.
   home.activation.generateSSHKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
