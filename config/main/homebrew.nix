@@ -13,7 +13,7 @@
       "jetbrains-toolbox"
       "google-chrome"
       "shottr"
-#      "basecamp"
+      "basecamp"
       "keymapp"
     ];
 
