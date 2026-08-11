@@ -12,8 +12,8 @@
         autohide = true;
       };
       NSGlobalDomain = {
-        KeyRepeat = 1000;
-        InitialKeyRepeat = 1000;
+        KeyRepeat = 1;
+        InitialKeyRepeat = 10;
       };
     };
   };
