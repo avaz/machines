@@ -6,6 +6,7 @@
     ];
 
     casks = [
+      "basecamp"
       "bitwarden"
       "docker-desktop"
       "jetbrains-toolbox"
