@@ -1,20 +1,42 @@
 { config, lib, ... }:
 
 {
+  security = {
+    pam = {
+        services = {
+            sudo_local = {
+                touchIdAuth = true;
+                watchIdAuth = false;
+            };
+        };
+    };
+  };
+
   system = {
     defaults = {
-      # syntho inherits common/system.nix, but we explicitly disable universalaccess
-      # writes since they fail due to TCC restrictions on this machine.
-      # Since reduceMotion=false and reduceTransparency=false are already macOS defaults,
-      # disabling this is safe (nothing is lost).
-      universalaccess = lib.mkForce {};
-      dock = {
-        autohide = true;
-      };
-      NSGlobalDomain = {
-        KeyRepeat = 1;
-        InitialKeyRepeat = 10;
-      };
+        dock = {
+            autohide = true;
+            launchanim = true;
+            mouse-over-hilite-stack = true;
+            orientation = "bottom";
+            tilesize = 48;
+        };
+        trackpad = {
+            Clicking = true;
+            TrackpadThreeFingerDrag = true;
+        };
+        universalaccess = {
+            reduceMotion = false;
+            reduceTransparency = false;
+        };
+        NSGlobalDomain = {
+          KeyRepeat = 1;
+          InitialKeyRepeat = 10;
+        };
+    };
+    keyboard = {
+        "enableKeyMapping" = true;
+        "remapCapsLockToEscape" = true;
     };
   };
 }

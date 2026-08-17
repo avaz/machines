@@ -29,6 +29,10 @@
             reduceMotion = false;
             reduceTransparency = false;
         };
+        NSGlobalDomain = {
+          KeyRepeat = 1;
+          InitialKeyRepeat = 10;
+        };
     };
     keyboard = {
         "enableKeyMapping" = true;
