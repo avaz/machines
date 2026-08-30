@@ -6,6 +6,7 @@
     # Machine-specific additions/overrides
     brews = [
       "llmfit"
+      "mlx-lm"
     ];
 
     casks = [
@@ -34,5 +35,3 @@
     };
   };
 }
-
-
